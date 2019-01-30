@@ -1,0 +1,77 @@
+aop:it is a weaving language(take multiple into a single proxy component(linking aspects of one application with other application) and that will be executed) and it is not spring related concept.it is like oject oriented to java.
+AspectJ terminolgy is used by spring to use aop.
+
+aspect
+join point(joining of advice and aspect)
+advice(either before aspect or after aspect)-actual bussiness logic
+pointcut-execution of all above
+
+need to take aspectjrt,aspectweaver,aopalliance,aspectj.jar
+
+before advice:advice that executes before one bussiness logic.
+
+logs are basically require for system recovery.
+
+joinpoint will do before or after method execution.
+
+
+***********************************************************
+jdbc framework:
+for accesing database connectivity using spring we use jdbc template class(which is there(predefined) in spring) which has set of methods for accessing database(ddl,dml etc..,)
+
+we need to supply datasource class to jdbc template class which is like connectivity link,username,password etc.,
+this is predefined class(name is DriverManagerDataSource) but property values are empty. so, we send these values we use bean with above user defined values using property tag.
+
+
+executing sql:
+String query="select count(*) from employee";
+int row=jdbcTemplateObject.queryForInt(query)->this will give output as int.
+for string
+String query="select name from employee where id=?";
+ .queryForObject(query,new Object[]{10},String.class);->this for string as output
+
+
+if we use select * ->then it print an object(with all values in it)
+then we use mapper
+Student st=jdbc---.queryForObject(query,new Object[]{10},new StudentMapper());
+public class s implements RowMapper<Student>{
+public student mapROw(ResultSet rs,int rowNum){
+Student s=new Student();
+s.setid(rs.getInt(1));
+similarlr it will do for all and return student object.
+}
+}
+
+ we use for upadate,delete,insert
+jdbc---.update(query,new object[]{"Ravi","11"});
+
+.execute(query)->to execute ddl commands like create a table.
+
+
+we need jars like
+spring-jdbc
+spring-tx
+
+
+in employeeDAO class where we are doing sql queries:
+private JdbcTemplate x;
+then
+we need to setJdbcTemplate(JdbcTemplate x)
+{
+this.x=x;
+}
+then 
+sql query methods in that class only or if we want in another class again we need to setjdbstemplate and yhen query methods.
+
+
+in xml:
+we need to define bean for employeeDAO class,and two predefined class which are datasource and jdbctemplate.
+In datasource we give datasource statement command of connection,username,password,class.for.name in property tag.
+In JdbcTemplate
+inside bean
+<bean id="" class="">
+<property name="jdbc" ref="ds(datasource id)"></property>
+
+In employeeDAO class
+<bean id="" class="">
+<property name="" ref="ds"/>

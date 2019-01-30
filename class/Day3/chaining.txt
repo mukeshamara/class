@@ -1,0 +1,26 @@
+
+class MyServlet1 extends HttpServlet{
+	public void doPost(HttpServletRequest request, HttpServletResponse
+	response) throws ServletException {
+		ServletContext ctx = this.getServletContext();
+		PrintWriter out = response.getWriter();
+		out.println("<html><body>");
+		out.println("<b> I am servlet1  </b>");
+		out.println("</body></html>");
+		RequestDispatcher rd = ctx.getRequestDispatcher("./s2");
+		rd.forward(request,response);
+		out.println("<b> after dispatch </b>");
+	}
+}
+
+class MyServlet2 extends HttpServlet{
+	public void doPost(HttpServletRequest request, HttpServletResponse
+	response) throws ServletException {
+		
+		PrintWriter out = response.getWriter();
+		out.println("<html><body>");
+		out.println("<b> I am servlet2 </b>");
+		out.println("</body></html>");
+		
+	}
+}	

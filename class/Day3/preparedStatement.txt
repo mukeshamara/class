@@ -1,0 +1,30 @@
+public Boolean saveEmployeeByPreparedStatement(final Employee e){  
+    String query="insert into employee values(?,?,?)";  
+    return jdbcTemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
+    @Override  
+    public Boolean doInPreparedStatement(PreparedStatement ps)  
+            throws SQLException, DataAccessException {  
+              
+        ps.setInt(1,e.getId());  
+        ps.setString(2,e.getName());  
+        ps.setFloat(3,e.getSalary());  
+              
+        return ps.execute();  
+              
+    }  
+    });  
+
+class Myprepared extends PreparedStatementCallback<Employee>
+{
+	@Overrride
+	public boolean doInPreparedStatement(PreparedStatement ps) 
+	throws SQLException, DataAccessException {  
+              
+        ps.setInt(1,e.getId());  
+        ps.setString(2,e.getName());  
+        ps.setFloat(3,e.getSalary());  
+              
+        return ps.execute();  
+              
+    }  
+} 

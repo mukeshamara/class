@@ -1,0 +1,51 @@
+Bean post processor:before the bean is injected into required module.
+container will injects beans.
+
+application context must verify in bean whether there is any life cycle methods are implemented in bean.
+
+beanpreprocessor interfaces:will try to before bean is initialized.
+bean post processor interface:once bean is completly loaded what we need to do.
+for above both we will use beanpstprocessor
+beanpostprocessor(interface(there are two defined methods))-public object postprocessafterinitialization,postprocessbeforeinitialization( object bean(for which bean), String beanname(id of the bean must be given))->these will reurn bean instance.
+
+xml:
+<bean id="" class"">
+<property name="" value=""></property>
+</bean>
+
+<bean class="the class name which we implemented with beanpostprocessor interface"/>->this will first execute before initialization then after initialization
+
+apliconte co=new classpahxnlapplicon("");
+co.registershutdownBook();->graceful shutdown(once beans are completed we need to unload the beans explictly otherwise it will be in active state)
+init-method in xml are explicitly initializing for which we need to done.
+
+before instantiation means we can use filters.
+
+@autowiring(property (name or type))(this will automatically between two beans)->if we give name then it will automaticaaly injected to the container similarly we can give type also.
+
+inheritance:
+xml:
+<bean id=""class="">
+<property>
+</bean>
+
+<bean id="" class="" parent="parent class bean id">(using extends for subclass or not using extends also this is working)
+<property>
+</bean>
+
+these are immutable.
+
+configuration file on javabased-net
+Applicaconte co=new Annotationconfigapplicationcontext("configuration java class name.class");
+
+to do customized ordering process(which bean has to performed in which order after one by one) for multiple beans we use ordered interface with bean post processor we can not do it.
+
+
+
+Event handling:
+event is an identifible action.
+why we need to handle events?
+any action which is not represented by timebounds then we use events.
+eg:login page->after entering login details it should transfer the details to server.(clicking the button instead of time bound)
+
+the process of handling the actions related to events is called event handling.(eg:web applications)

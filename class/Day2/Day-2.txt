@@ -1,0 +1,106 @@
+Core Module
+-----------
+
+1. Base module for all other modules.
+
+2. If it is used alone, can be used to develop
+   standalone applications.
+
+Dependency Lookup
+------------------
+The Dependency Lookup is an approach where we get the resource after demand. There can be various ways to get the resource for example:
+
+A obj = new AImpl(); 
+
+In such way, we get the resource(instance of A class) directly by new keyword.
+
+Another way is Factory  Method:
+
+public Class A
+{
+   public A(){
+	
+   }
+
+   public static A getA(){
+	return new A();
+   }
+}
+
+Alternatively,
+    Context ctx = new InitialContext();  
+    Context environmentCtx = (Context) ctx.lookup	("java:comp/env");  
+    A obj = (A)environmentCtx.lookup("A");  
+
+
+Problems with Dependency Lookup
+-------------------------------
+1. Tightly Coupled
+2. Not easy for testing
+
+
+
+Dependency Injection (DI): 
+
+It is a design pattern that removes the dependency from the programming code so that it can be easy to manage and test the application. Dependency Injection makes our programming code loosely coupled.
+
+There are  three ways of Dependency Injection in Spring
+
+    By Constructor
+    By Setter method
+    By Interface method (not significant)
+
+refer DI.txt for details
+
+
+3. mainly used for Dependency Management
+
+4. It has two types of containers:
+
+	4.1 BeanFactory
+
+	4.2 ApplicationContext
+
+4.1 BeanFactory: This is an interface and it is implemented by 
+    using XmlBeanFactory class
+
+    eg>
+
+          XmlBeanFactory factory = new XmlBeanFactory
+          (new ClassPathResource("Beans.xml"));
+
+4.2 ApplicationContext: This is also an interface and it is 
+    implemented in three ways:
+
+	a. FileSystemXmlApplicationContext: This container load 
+	   the definitions of the beans from an XML file. 
+	   Here you need to provide the full path of the XML bean
+           configuration file to the constructor.
+
+	b. ClassPathXmlApplicationContext: This container loads 
+	   the definitions of the beans from an XML file. 
+	   Here you do not need to provide the full path of the XML
+           file but you need to set CLASSPATH properly because this container 
+	   will look like bean config.
+
+	c. WebXmlApplicationContext: This container loads the XML file with 
+	   definitions of all beans from within a web application.
+
+
+configuring the metadata
+-------------------------
+It can be provided to container in multiple ways:
+
+1. XML Based
+
+2. Annotation Based (from Spring2.5 onwards)
+	refer Page49 of Pdf
+
+3. Java Based(from Spring3.0 onwards)
+   
+
+
+
+
+
+

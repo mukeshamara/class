@@ -1,0 +1,16 @@
+four types of autowiring:
+1)no-autowiring won't access
+2)byName
+3)byType
+4)constructor
+
+Aspect orieted programmimg(AOP):-special feature of spring framework through which we can combine multiple aspects(service)(services needed to be manipulated) of bussiness logic.
+join point:-represents a method execution(aspect need to be executed)(where aspect attached to bussiness logic)
+advice:-action taken by an aspect a a particular join point.
+types of advice are:around,before and after advice
+pointcut:-regular expression matches a javapoint.then a specified advice associated with pointcut will be executed.
+
+@aspect-consider that class is aspect class(to distinguish for comiler between aspect and bussiness logic)
+@Before
+
+@pointcut(execution(*clasName.*(...)));

@@ -1,0 +1,298 @@
+spring framework runtime:
+core module:
+base for all other modules.
+can be used to develop standalone applications.
+dependency injection was taken care by this core module.
+
+dependency lookup:
+get the resource after demand.
+when we give A obj=new Ai();->for each call it will create different objects at different instances.
+then it will lookup in memory whether this class is there or not and then it create the object.
+
+or we can use in factory method:
+to use same code then we use this
+class
+A
+{
+public A()
+{
+}
+public static A sd()
+{
+return new A();
+}
+}
+
+main:  A a=A.sd();
+
+
+another way is JNDE:
+Context x=new InitialContext();->context is interface and initialazation is implementation class(at the time of loading)
+context en=(Context)x.looku("provide the environment where java is loaded");
+A ob=(A)en.lookup("A");
+
+all the above cases are taken care by core container.
+depenency lookup is thihtly coupled.and it is not easy for testing.
+
+Dependency injection:gives the respnsibility to container and it will inject
+there are three ways:by constructor,by setter method,by interface method
+
+in xml file:
+this can be done by
+1.primitive and string based values
+2.dependent objects
+3.collection values 
+
+eg: for primitive
+<beans>
+<bean id="e" class="employee">-we are doing dynamically(to invoke object) at the required place(container will create and invoke)
+if we give multiple constructors then all will go to invoke for single constructor not for muktiple constructors
+eg:if we have constructor with id and constructor wt name and constructor with both and if we give cg with id,name then only constructor eith id,name will only be invoked and not for constructor only eith id or only with name and this will be injected.
+for every class there will be only one bean oherwise there will be ambiguity.
+>Constructor-arg value="10" type="int"></constructor-arg>
+</bean>
+</beans>
+
+eg for dependent:
+we will create a class externally and invoke this class into another class.then how to give his bean.
+
+<beans>
+<bean id="al" class="address">
+<con-arfg val=""></cons-arg>
+<con-arfg val=""></cons-arg>
+<con-arfg val=""></cons-arg>
+</bean>
+
+<bean id="e" class="employee">->in we are injecting address obect
+<con-arfg val=""></cons-arg>
+ <constructor-arg ref = "al"></constructor-arg >
+</beans>
+
+eg for collection: if class has list variable
+<beans>
+<bean id="al" class="address">
+<con-arfg val=""></cons-arg>
+<con-arfg val=""></cons-arg>
+<con-arfg >
+<list>
+<value>dh</value>
+<value>dh</value>
+<value>dh</value>
+<value>dh</value>
+</cons-arg>
+</bean>
+</beans>
+</bean>
+
+
+ClassPathResource r=new ClassPathResource("--.xml");
+BeanFactory fac=new XmlBeanFactory(r);
+other type for applicaionContext.
+use .getbean("eq"); to get object.
+
+
+xml for object ref:
+
+<bean id="e1" class="com.example.Address">
+<constructor-arg value="10" ></constructor-arg>
+
+
+</bean>
+
+<bean id="e2" class="com.example.Address">
+<constructor-arg value="12"></constructor-arg>
+
+
+</bean>
+<bean id="e4" class="com.example.Address">
+<constructor-arg value="10" ></constructor-arg>
+
+
+</bean>
+
+<bean id="e3" class="com.example.Employee">
+<constructor-arg value="10" type="Integer"></constructor-arg>
+<constructor-arg>
+<list>
+<ref bean="e1"/>
+
+<ref bean="e2"/>
+
+<ref bean="e4"/>
+
+</list>
+</constructor-arg>
+
+</bean>
+
+
+fileXmlApplicationContext:It will read file from anywhere(just mension the path).
+classpathxmlapplicationcontext:It will read the file when it is present in that class path only.
+webxmlapplicationcontext:it will read from web.(not explained)
+
+
+bean life cycle:when container starts then bean cycle will execute.
+three methods are:initial,destroy,bussiness logic
+when get bean is called then destroy will also called.(these methods are having dummy code)
+if we want our code to init and destroy then we need to write like in xml as
+<bean id="" class="" init-method="i1"/>(for destroy its different(destroy-method))
+
+this is in the java class
+public class example{
+public void init(){
+}
+}
+
+scope is having different values.
+one is singleton and other is prototype.
+
+constructor-arg->used to inject the dependencies to constructor.
+
+lazy-initiazation-mode->till we requested the bean will not been instantiated after container is started(we make true/false).
+initiation mode->
+qutowirin-mode->for annotation based(inject the dependencies)                            xml based(most simple and generic  but remaining two are fast), java based(),annotation based(pre-written-codes->provides additional information to compiler) 
+
+
+annotations-net
+
+java based-
+eg:
+@configuration
+public class javabasedconfiguration{
+
+@Bean(name="address1")
+public address sethoyse()
+{
+return new address("","","");
+}
+
+
+@Bean(name="address2")
+public address sethoysef()
+{
+return new address("","","");
+}
+
+in container we send as appliconte c=new classpathxmlapplicaon(""javabasedconfiguration.class");
+Object o=c.getBean("address1");
+
+using java based we can pass multiple configuration files
+by using register method
+annotationconfigapplicationcontext c=new anno();
+c.register(sdj.class,sqdkh,class);->passing multiple classes (all classbeans are loaded)
+
+map:
+<property name="maps">
+			<map>
+				<entry key="Key 1" value="1" />
+				<entry key="Key 2" value-ref="PersonBean" />
+				<entry key="Key 3">
+					<bean class="com.mkyong.common.Person">
+						<property name="name" value="mkyongMap" />
+						<property name="address" value="address" />
+						<property name="age" value="28" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+<bean id="PersonBean" class="com.mkyong.common.Person">
+		<property name="name" value="mkyong1" />
+		<property name="address" value="address 1" />
+		<property name="age" value="28" />
+	</bean>
+list:
+<property name="lists">
+			<list>
+				<value>1</value>
+				<ref bean="PersonBean" />
+				<bean class="com.mkyong.common.Person">
+					<property name="name" value="mkyongList" />
+					<property name="address" value="address" />
+					<property name="age" value="28" />
+				</bean>
+			</list>
+		</property>
+set:
+<property name="sets">
+			<set>
+				<value>1</value>
+				<ref bean="PersonBean" />
+				<bean class="com.mkyong.common.Person">
+					<property name="name" value="mkyongSet" />
+					<property name="address" value="address" />
+					<property name="age" value="28" />
+				</bean>
+			</set>
+		</property>
+
+java class:
+public class Customer 
+{
+	private List<Object> lists;
+	private Set<Object> sets;
+	private Map<Object, Object> maps;
+	private Properties pros;
+	
+	//...
+}
+
+my example:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+        <bean id="e3" class="com.pack.Employee">
+        <property name="x">
+        
+       <util:map map-class="java.util.TreeMap">
+        <entry key="100" value="USA"></entry>
+        <entry key="22" value="India"></entry>
+         <entry key="64" value="Pakistan"></entry>
+        <entry key="33" value="Nepal"></entry>
+        <entry key="84" value="Pakistan"></entry>
+         <entry key="44" value="Pakistan"></entry>
+      </util:map>
+        </property>
+        <property name="x1">
+       <util:set set-class="java.util.TreeSet">
+       <value>2</value>
+       <value>100</value>
+       <value>45</value>
+       <value>0</value>
+       <value>256</value>
+       </util:set>
+        </property>
+        </bean>
+        </beans>
+
+
+MApfactorybean method:
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="CustomerBean" class="com.mkyong.common.Customer">
+		<property name="maps">
+			<bean class="org.springframework.beans.factory.config.MapFactoryBean">
+				<property name="targetMapClass">
+					<value>java.util.HashMap</value>
+				</property>
+				<property name="sourceMap">
+					<map>
+						<entry key="Key1" value="1" />
+						<entry key="Key2" value="2" />
+						<entry key="Key3" value="3" />
+					</map>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,5 @@
+four types of autowiring:
+1)no-autowiring won't access
+2)byName
+3)byType
+4)constructor

@@ -1,0 +1,14 @@
+Aspect:  A Service
+
+Advice : A Service provider.
+
+pointcut : A condition to execute the service.
+
+Advicer: pointcuts with advice combination
+
+proxy:  
+
+
+	
+
+

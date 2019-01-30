@@ -1,0 +1,62 @@
+standalone app,distributed application etc..,
+
+every appiation contains three layers.
+1.user interface-interact betwen users and complete application(get and presen data to users)user allow only to user interface layer
+2.bussiness logic-perform bussiness logic(data is processed in it which taken from user interface)
+3.data access object layer(dao)-interact with database because it is in different technology
+
+database-(to process business logic it should take from database)
+
+desktop or standalone applications(1-tier architectecture)-all three layers are dependent on each other and all three layers will be in singe machine(means only one user can work at a time)
+
+a tier is an inividual component(called as layer)
+they designed these tier architecture because to change in any one layer they need to change in all layers.
+2-tier architecture(implemented in client(machine which contains only ui) server architecture)-ui as one layer and (bussiness logic,database) as one layer
+this types are used when multiple users want to use it.
+
+3-tier architecture-all three layers are distinctly seperated and all are not dependent.(all layers will run in different servers)-is also called distributed application because all layers are distributed in different servers. 
+for an application we can provide multiple layers not only those 3 layers.
+increasing layers will increase modularity and decreases the complexity.
+now a days people are using micro services because they can be re-usable.(whichever layer we want we can add or use or remove)
+
+using n-tier arcitecture we get micro services.
+
+in any application contains
+1.actual bussiness logic(logic which was task)
+2.application process logic
+
+framework-pre-defined solution(take care of all common logic things(using to generate)) like how data wil be flowing etc.,(3rd party people)
+framework reduces complexity.
+spring is a framework.
+hibernate is a framework which connect from programming language to database.
+spring is for complete appication.
+spring is a java based framework(which focus on all common logic)-it is defined as 
+a)light weight-comparing with other programmimg languages.(no of libraries or jars used to establish or develop spring which is very less compare to other frameworks)-no dependency on any other modules(whatever we need we will grab that instead of reading all)
+b)open source-freely accessed
+c)loosly coupled-modules inside spring framework are having no dependency between modules 
+most advantage of spring are these two
+java naming driving interface(JNDI)
+d)dependency injection-inversion of control(IOC)-when we require it will automatically should use-creating the required objects externally and inquire or injected in the required classes(eg:-jdbc connection,(amazon and courier in amazon-whenever product is rdered a courier id will be generated and they will deliver to courier(they will go to amazon provider and collect) instead of amazon people has to pack and deliver to courier))
+e)aspect oriented framework-third party services like security etc., are merged with main logic to complete the process(make complex code easy).
+atomicity- do all or  do none of transactions
+spring is framwork of fameworks(we can combine spring with other frameworks like hibernate etc.,)
+spring boot is for how to establsh micro services.
+one single service we can apply spring framework.(eg:-for security service or login we can use spring)-but to combine both we use springboot.
+
+pivotal is serving spring.
+spring 4.x(which has all 5 features) is more stable but spring 5 is now in market(which is not stable).
+
+pojo classes-net
+
+foe any spring program we need
+1).xml file-will do the injections after creation of file-.xml files related to containers
+2)Bean object-consists of properties and bussiness logic
+3)main method
+in spring,there are 2 containers(create the requires object and need to inject in require module)
+1.beanfactory
+2.application context
+these 2 are represented as interfaces.
+classpath application xml context-implemention class for application context-while we will create the object(means container will start)-we provide xml file which we required into this
+
+ApplicationContext a=new ClassPathXmlApplicationContext("--.xml");
+a.getBean("e");->in form of object,so typecast it into the class which we need
