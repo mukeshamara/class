@@ -1,0 +1,21 @@
+AngularJS is light weight open source framework which work for single page application using mvc achitecture and without reloading the page.
+It is 2 way binding means any change in model(data(represented with variables)) or view(presentation(using html elements)) that will be reflected in other one also using controller(binding and governing between view and model are done by this).
+in this they developed predefined java script libraries in it to write the code and it not only defines the methods and with also we should follow some rules to write or for our functionality.
+
+using java script:
+<html>
+<body>
+	Enter name: <input type="text" name="model" onkeyup="bind()"/> 
+	Hello <label id="view">
+<script>
+	function bind(){
+	var m1=document.getElementById("model");
+	var v1=document.getElementById("view");
+	v1.Innerhtml.value=m1.text;(this will get the value)
+}
+
+
+ng serve --open(is to start the server and open)
+ng serve(if it is open then using this we start the server)
+
+ng g c child --spec=false -it -is(to create child componenet with .ts only)

@@ -1,0 +1,8 @@
+we use serialization to store the object data into file but we can not change or use any bussiness logic.
+
+data types specific:
+java based 
+jdbc data types
+database specific data types
+
+hibernaye is java based framework which is used to connect to database.
