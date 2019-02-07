@@ -1,0 +1,96 @@
+Services:
+---------
+
+
+1.  ng generate service data
+
+2. Open up the file, located at: /src/app/data.service.ts:
+
+import { Injectable } from '@angular/core';
+
+@Injectable()
+
+export class DataService {
+
+  constructor() { }
+
+}
+
+upate the above file to look like below:
+
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
+@Injectable()
+
+export class DataService {
+
+  private goals = new BehaviorSubject<any>(['The initial goal', 'Another silly life goal']);
+  goal = this.goals.asObservable();
+
+  constructor() { }
+
+  changeGoal(goal) {
+    this.goals.next(goal)
+  }
+
+}
+
+
+
+3. Importing the Service
+
+Each time you generate a service, you need to add it to the providers 
+array of the /src/app/app.module.ts file like so:
+
+
+// Other imports removed for brevity
+import { DataService } from './data.service';
+
+@NgModule({
+  ...
+  providers: [DataService],
+  ...
+})
+
+
+
+4. Using the Service in our Components
+
+Open up our /src/app/home/home.component.ts file and import the service 
+and add it in the constructor via dependency injection:
+
+
+// Other imports removed for brevity
+import { DataService } from '../data.service';
+
+// @Component Decorator..
+
+export class HomeComponent implements OnInit {
+
+  goals = [];
+
+  constructor(private _data: DataService) { }
+
+ngOnInit() {
+    this.itemCount = this.goals.length;
+    this._data.goal.subscribe(res => this.goals = res);
+    this._data.changeGoal(this.goals);
+  }
+
+  addItem() {
+    this.goals.push(this.goalText);
+    this.goalText = '';
+    this.itemCount = this.goals.length;
+    this._data.changeGoal(this.goals);
+  }
+
+  removeItem(i) {
+    this.goals.splice(i, 1);
+    this._data.changeGoal(this.goals);
+  }
+}
+
+
+
+

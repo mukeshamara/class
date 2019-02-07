@@ -1,0 +1,112 @@
+Session Object
+--------------
+
+A Session is used to get a physical connection with a database. 
+
+The Session object is lightweight and designed to be instantiated each time an interaction is needed with the database. 
+
+Persistent objects are saved and retrieved through a Session object.
+
+Methods
+-------
+
+1. Transaction beginTransaction()
+Begin a unit of work and return the associated Transaction object.
+
+2. void cancelQuery()
+Cancel the execution of the current query.
+
+3. void clear()
+Completely clear the session.
+
+4. Connection close()
+End the session by releasing the JDBC connection and cleaning up.
+
+5. Criteria createCriteria(Class persistentClass)
+Create a new Criteria instance, for the given entity class, or a superclass of an entity class.
+
+6. Criteria createCriteria(String entityName)
+Create a new Criteria instance, for the given entity name.
+
+7. Serializable getIdentifier(Object object)
+Return the identifier value of the given entity as associated with this session.
+
+8. Query createFilter(Object collection, String queryString)
+Create a new instance of Query for the given collection and filter string.
+
+9. Query createQuery(String queryString)
+Create a new instance of Query for the given HQL query string.
+
+10. SQLQuery createSQLQuery(String queryString)
+Create a new instance of SQLQuery for the given SQL query string.
+
+11. void delete(Object object)
+Remove a persistent instance from the datastore.
+
+12. void delete(String entityName, Object object)
+Remove a persistent instance from the datastore.
+
+13. Session get(String entityName, Serializable id)
+Return the persistent instance of the given named entity with the given identifier, 
+or null if there is no such persistent instance.
+
+14. SessionFactory getSessionFactory()
+Get the session factory which created this session.
+
+15. void refresh(Object object)
+Re-read the state of the given instance from the underlying database.
+
+16. Transaction getTransaction()
+Get the Transaction instance associated with this session.
+
+17. boolean isConnected()
+Check if the session is currently connected.
+
+18. boolean isDirty()
+Does this session contain any changes which must be synchronized with the database?
+
+19. boolean isOpen()
+Check if the session is still open.
+
+20. Serializable save(Object object)
+Persist the given transient instance, first assigning a generated identifier.
+
+21. void saveOrUpdate(Object object)
+Either save(Object) or update(Object) the given instance.
+
+22. void update(Object object)
+Update the persistent instance with the identifier of the given detached instance.
+
+23. void update(String entityName, Object object)
+Update the persistent instance with the identifier of the given detached instance.
+
+Mapping file
+------------
+
+1. XML based
+
+2. Java Annotation Based
+
+XML Based:
+----------
+<hibernate-mapping>
+	<class name="NameOfThePojoClass" table="DatabaseTable" >
+		<id name = "id" type = "int" column = "id">
+         		<generator class="native"/>
+      		</id>
+      
+      		<property name = "firstName" column = "first_name" type = "string"/>
+      		<property name = "lastName" column = "last_name" type = "string"/>
+      		<property name = "salary" column = "salary" type = "int"/> 
+	</class>
+</hibernate-mapping>
+
+
+Annotation Based
+----------------
+
+@Entity
+@Table(name="tablename")
+@Column(name="ColumnName")
+
+
