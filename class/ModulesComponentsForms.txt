@@ -10,6 +10,8 @@ and provides the template and related component-specific metadata.
 components can be nested and data can be communicated from one component to another ie., from
 parent to child or vice versa
 
+
+
 To create a sub component
 -------------------------
 1. create a parent component using
@@ -141,11 +143,16 @@ app.html
 Modules
 -------
 
-Module in Angular refers to a place where you can group the components, directives, pipes, and services, which are related to the application.
+Module in Angular refers to a place where you can group the components, directives, 
+pipes, and services, which are related to the application.
 
-In case you are developing a website, the header, footer, left, center and the right section become part of a module.
+In case you are developing a website, the header, footer, left, center and the right 
+section become part of a module.
 
-To define module, we can use the NgModule. When you create a new project using the Angular –cli command, the ngmodule is created in the app.module.ts
+To define module, we can use the NgModule. When you create a new project 
+using the Angular –cli command, 
+
+the ngmodule is created in the app.module.ts
 
 Example
 -------
@@ -205,6 +212,20 @@ This will include the services created.
 Bootstrap
 ----------
 This includes the main app component for starting the execution.
+
+
+Pipes  --> to filter the data 
+-----
+Lowercase
+Uppercase
+Date
+Currency
+Json
+Percent
+Decimal
+Slice
+
+
 
 Routing
 -------
